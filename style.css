@@ -10,7 +10,7 @@ h1{
 
 h2{
 	font-family: courier;
-	font-size: 40px;
+	font-size: 38px;
 	font-style: bold;
 }
 
@@ -46,4 +46,8 @@ input{
 
 input:focus {
     border: 2px solid #555;
+}
+
+.col-md-2{
+	padding: 25px 0px;
 }

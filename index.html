@@ -55,6 +55,7 @@
 				changeMode(current + 3);
 				var x = current + 1;
 			} else {
+				generateRevealText();
 				changeMode(9);
 			}
 		}
@@ -79,6 +80,25 @@
 	function generateWisdomText(num){
 		var rand = listOfWisdom[Math.floor(Math.random() * listOfWisdom.length)];
 		document.getElementById("wisdomText" + num).innerHTML = rand;
+	}
+
+	listOfReveal= ["It was the best one there",
+					"Wasn't any better option",
+					"I am confident about this one",
+					"Go with this one, I promise",
+					"This is the one, I just know it",
+					"This is the one, I promise",
+					"The other options weren't as good",
+					"The voice has spoken",
+					"I hope you're happy with this choice",
+					"This is the best choice, I'm sure of it",
+					"The other choices weren't that good",
+					"No doubt in my mind, this is the one",
+					"No doubt about it"
+	];
+	function generateRevealText(){
+		var rand = listOfReveal[Math.floor(Math.random() * listOfReveal.length)];
+		document.getElementById("revealText").innerHTML = rand;
 	}
 
 
@@ -107,7 +127,7 @@
 				<div id="intro2">
 					<a class="backButton" onclick="changeMode(menuType - 1)"><span class="glyphicon glyphicon-menu-left"></span></a>
 					<h1>How big is your list?</h1> 
-					<div class="row text-center" style="margin-top: 50px; padding: 0 100px;">
+					<div class="row text-center" style="margin-top: 20px; padding: 0 100px;">
 						<div class="col-md-2" >
 							<button id="l2" type="button" onclick="listSize=2; changeMode(3); generateWisdomText(1);"  class="btn btn-primary btn-lg">2</button>
 						</div>
@@ -170,15 +190,15 @@
 					<button id="nextButton6" type="button" class="btn btn-primary btn-lg" style="margin-top: 20px;">Next</button>
 				</div>
 				<div id="intro9">
-					<h2>The answer is ready</h2>
+					<h1>The answer has been chosen</h1>
 					<h6>Preceed whenever you're ready</h6>
-					<button id="pickButton" type="button" onclick="pickFromList()" class="btn btn-primary btn-lg" style="margin-top: 20px;">Pick</button>
+					<button id="pickButton" type="button" onclick="pickFromList()" class="btn btn-primary btn-lg" style="margin-top: 20px;">Reveal</button>
 				</div>
 				<div id="intro10">
-					<h2>We think you should go with</h2>
+					<h2>I think you should go with</h2>
 					<h1 id="result"></h1> 
-					<h6 style="margin-top: 20px;">It's was best option out of the rest</h6>
-					<button id="menuButton" type="button" onclick="changeMode(1); clearAll();" class="btn btn-primary btn-lg" style="margin-top: 20px;">Menu</button>
+					<h6 id="revealText" style="margin-top: 20px;"></h6>
+					<button id="menuButton" type="button" onclick="changeMode(1); clearAll();" class="btn btn-primary btn-lg" style="margin-top: 20px;">Finish</button>
 				</div>
 				<h3 id="warning" style="margin-top: 30px;"></h3>
 				<div id="progressbar" class="progress" style="margin-top: 80px;">
@@ -214,13 +234,8 @@
 						}
 					}
 				   	else if(menuType > 2 && menuType < 9){
-				   		if(e.keyCode == 8)	{
-
-				   		}
-				   		else{
-				   			var x = menuType - 2;
+				   		var x = menuType - 2;
 				   		document.getElementById("inputField" + x).focus();
-				   		}
 				   	}
 				   	else if(menuType == 9){
 				   		if(e.keyCode == 13)	$("#pickButton").click();
