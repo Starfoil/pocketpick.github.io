@@ -291,7 +291,15 @@
 				document.getElementById("nextButton6").onclick = function() {
 					updateList(6);
 				}
-
+				var mobile = (/iphone|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase()));  
+				if(mobile){
+					var cols = document.getElementsByClassName("backButton");
+					for(i=0; i < cols.length; i++) {
+				    	cols[i].style.float = "none";
+					}
+					$("h1").css("font-size", "40px");
+					$("h2").css("font-size", "30px");
+				}
 			</script>
 		</div>
 	</div>
