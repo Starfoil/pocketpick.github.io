@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8"> 
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="css/animate.css">
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<script type="text/javascript">
+	var menuType = 1;
+	var currentDiv = "#intro1";
+	var listSize = 0;
+	var list = [];
+
+	function changeMode(target){
+		document.getElementById("warning").innerHTML = "";
+		var targetDiv = "#intro" + target;
+		$(currentDiv).fadeOut(500, function(){$(targetDiv).fadeIn(500);
+			if(target > 2 && target < 10){
+				$("#progressbar").fadeIn(500);
+			}
+			else{
+				$("#progressbar").hide();
+			}});
+		menuType = target;
+		currentDiv = targetDiv;
+
+	}
+
+	function clearAll(){
+		document.getElementById("inputField1").value = "";
+		document.getElementById("inputField2").value = "";
+		document.getElementById("inputField3").value = "";
+		document.getElementById("inputField4").value = "";
+		document.getElementById("inputField5").value = "";
+		document.getElementById("inputField6").value = "";
+		document.getElementById("pbar").style.width = 0;
+		list = [];
+	}
+
+	function updateList(current){
+		if(document.getElementById("inputField" + current).value == ""){
+			document.getElementById("warning").innerHTML = "You left it blank...";
+			document.getElementById("inputField" + current).focus();
+		}
+		else{
+			list[current - 1] = document.getElementById("inputField" + current).value;
+			updateBar(current);
+			if (listSize > current) {
+				generateWisdomText(current + 1);
+				changeMode(current + 3);
+				var x = current + 1;
+			} else {
+				changeMode(9);
+			}
+		}
+	}
+
+
+	function generateList(num){
+		
+	}
+
+	listOfWisdom = ["Could it be this one?", 
+					"Who knows, it might just be this", 
+					"This is the one, I feel it", 
+					"Could this be it?",
+					"Perhaps this is the one",
+					"I have a good feeling about this",
+					"Will this be the chosen one?",
+					"This just might be the one",
+					"This might be it",
+					"Is this the one?"
+	];
+	function generateWisdomText(num){
+		var rand = listOfWisdom[Math.floor(Math.random() * listOfWisdom.length)];
+		document.getElementById("wisdomText" + num).innerHTML = rand;
+	}
+
+
+	function pickFromList(){
+		var rand = list[Math.floor(Math.random() * list.length)];
+		changeMode(10);
+		document.getElementById("result").innerHTML = rand;
+	}
+
+	function updateBar(progressNum){
+		var prog = (100 / listSize) * progressNum;
+		document.getElementById("pbar").style.width = prog + "%";
+	}
+
+</script>
+<body>
+
+	<div class="container animated fadeIn" style="margin-top: 100px;">
+		<div class="jumbotron text-center">
+			<div id="heading">
+				<div id="intro1">
+					<h1>Pocket Pick</h1> 
+					<h6>For when you can't decide</h6>
+					<button id="startButton" type="button" class="btn btn-primary btn-lg" onclick="changeMode(2)" style="margin-top: 20px;">Start</button>
+				</div>
+				<div id="intro2">
+					<a class="backButton" onclick="changeMode(menuType - 1)"><span class="glyphicon glyphicon-menu-left"></span></a>
+					<h1>How big is your list?</h1> 
+					<div class="row text-center" style="margin-top: 50px; padding: 0 100px;">
+						<div class="col-md-2" >
+							<button id="l2" type="button" onclick="listSize=2; changeMode(3); generateWisdomText(1);"  class="btn btn-primary btn-lg">2</button>
+						</div>
+						<div class="col-md-2" >
+							<button id="l3" type="button" onclick="listSize=3; changeMode(3); generateWisdomText(1);" class="btn btn-primary btn-lg">3</button>
+						</div>
+						<div class="col-md-2" >
+							<button id="l4" type="button" onclick="listSize=4; changeMode(3); generateWisdomText(1);" class="btn btn-primary btn-lg">4</button>
+						</div>
+						<div class="col-md-2" >
+							<button id="l5" type="button" onclick="listSize=5; changeMode(3); generateWisdomText(1);" class="btn btn-primary btn-lg">5</button>
+						</div>
+						<div class="col-md-2" >
+							<button id="l6" type="button" onclick="listSize=6; changeMode(3); generateWisdomText(1);" class="btn btn-primary btn-lg">6</button>
+						</div>
+						<div class="col-md-2" >
+							<button id="lx" type="button" class="btn btn-primary btn-lg">X</button>
+						</div>
+					</div>
+				</div>
+				<div id="intro3">
+					<h1 id="option1h">Your first option?</h1> 
+					<h6 id="wisdomText1"></h6>
+					<input id="inputField1" style="margin-top: 40px;"></br>
+					<button id="nextButton1" type="button" class="btn btn-primary btn-lg" style="margin-top: 20px;">Next</button>
+				</div>
+				<div id="intro4">
+					<a class="backButton" onclick="changeMode(menuType - 1)"><span class="glyphicon glyphicon-menu-left"></span></a>
+					<h1 id="option2h">How about the second?</h1> 
+					<h6 id="wisdomText2"></h6>
+					<input id="inputField2" style="margin-top: 40px;"></br>
+					<button id="nextButton2" type="button" class="btn btn-primary btn-lg" style="margin-top: 20px;">Next</button>
+				</div>
+				<div id="intro5">
+					<a class="backButton" onclick="changeMode(menuType - 1)"><span class="glyphicon glyphicon-menu-left"></span></a>
+					<h1>And the third?</h1> 
+					<h6 id="wisdomText3"></h6>
+					<input id="inputField3" style="margin-top: 40px;"></br>
+					<button id="nextButton3" type="button" class="btn btn-primary btn-lg" style="margin-top: 20px;">Next</button>
+				</div>
+				<div id="intro6">
+					<a class="backButton" onclick="changeMode(menuType - 1)"><span class="glyphicon glyphicon-menu-left"></span></a>
+					<h1>Now the fourth</h1> 
+					<h6 id="wisdomText4"></h6>
+					<input id="inputField4" style="margin-top: 40px;"></br>
+					<button id="nextButton4" type="button" class="btn btn-primary btn-lg" style="margin-top: 20px;">Next</button>
+				</div>
+				<div id="intro7">
+					<a class="backButton" onclick="changeMode(menuType - 1)"><span class="glyphicon glyphicon-menu-left"></span></a>
+					<h1>Fifth option?</h1> 
+					<h6 id="wisdomText5"></h6>
+					<input id="inputField5" style="margin-top: 40px;"></br>
+					<button id="nextButton5" type="button" class="btn btn-primary btn-lg" style="margin-top: 20px;">Next</button>
+				</div>
+				<div id="intro8">
+					<a class="backButton" onclick="changeMode(menuType - 1)"><span class="glyphicon glyphicon-menu-left"></span></a>
+					<h1>And finally the sixth?</h1> 
+					<h6 id="wisdomText6"></h6>
+					<input id="inputField6" style="margin-top: 40px;"></br>
+					<button id="nextButton6" type="button" class="btn btn-primary btn-lg" style="margin-top: 20px;">Next</button>
+				</div>
+				<div id="intro9">
+					<h2>The answer is ready</h2>
+					<h6>Preceed whenever you're ready</h6>
+					<button id="pickButton" type="button" onclick="pickFromList()" class="btn btn-primary btn-lg" style="margin-top: 20px;">Pick</button>
+				</div>
+				<div id="intro10">
+					<h2>We think you should go with</h2>
+					<h1 id="result"></h1> 
+					<h6 style="margin-top: 20px;">It's was best option out of the rest</h6>
+					<button id="menuButton" type="button" onclick="changeMode(1); clearAll();" class="btn btn-primary btn-lg" style="margin-top: 20px;">Menu</button>
+				</div>
+				<h3 id="warning" style="margin-top: 30px;"></h3>
+				<div id="progressbar" class="progress" style="margin-top: 80px;">
+					<div id="pbar" class="progress-bar" role="progressbar" style="width:0%;"></div>
+				</div>
+			</div>
+			<script>
+				document.onkeypress = function (e) {
+					e = e || window.event
+					if(menuType == 1){
+						if(e.keyCode == 13)	$("#startButton").click();
+					}
+					else if(menuType == 2){
+						switch (e.keyCode) {
+						    case 50:
+						        $("#l2").click();
+						        break;
+						    case 51:
+						        $("#l3").click();
+						        break;
+						    case 52:
+						        $("#l4").click();
+						        break;
+						    case 53:
+						        $("#l5").click();
+						        break;
+						    case 54:
+						        $("#l6").click();
+						        break;
+						    case 88:
+						        $("#lx").click();
+						        break;
+						}
+					}
+				   	else if(menuType > 2 && menuType < 9){
+				   		if(e.keyCode == 8)	{
+
+				   		}
+				   		else{
+				   			var x = menuType - 2;
+				   		document.getElementById("inputField" + x).focus();
+				   		}
+				   	}
+				   	else if(menuType == 9){
+				   		if(e.keyCode == 13)	$("#pickButton").click();
+				   	}
+				   	else if(menuType == 10){
+				   		if(e.keyCode == 13)	$("#menuButton").click();
+				   	}
+				};
+				$("#inputField1").keyup(function(event){
+					if(event.keyCode == 13)	updateList(1);
+				})
+				$("#inputField2").keyup(function(event){
+					if(event.keyCode == 13)	updateList(2);
+				})
+				$("#inputField3").keyup(function(event){
+					if(event.keyCode == 13)	updateList(3);
+				})
+				$("#inputField4").keyup(function(event){
+					if(event.keyCode == 13)	updateList(4);
+				})
+				$("#inputField5").keyup(function(event){
+					if(event.keyCode == 13)	updateList(5);
+				})
+				$("#inputField6").keyup(function(event){
+					if(event.keyCode == 13)	updateList(6);
+				})
+				$("#progressbar").hide();
+				$("#intro2").hide();
+				$("#lxform").hide();
+				$("#intro3").hide();
+				$("#intro4").hide();
+				$("#intro5").hide();
+				$("#intro6").hide();
+				$("#intro7").hide();
+				$("#intro8").hide();
+				$("#intro9").hide();
+				$("#intro10").hide();
+				document.getElementById("nextButton1").onclick = function() {
+					updateList(1);
+				}
+				document.getElementById("nextButton2").onclick = function() {
+					updateList(2);
+				}
+				document.getElementById("nextButton3").onclick = function() {
+					updateList(3);
+				}
+				document.getElementById("nextButton4").onclick = function() {
+					updateList(4);
+				}
+				document.getElementById("nextButton5").onclick = function() {
+					updateList(5);
+				}
+				document.getElementById("nextButton6").onclick = function() {
+					updateList(6);
+				}
+
+			</script>
+		</div>
+	</div>
+	
+</body>
+</html>
