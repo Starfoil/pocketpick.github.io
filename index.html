@@ -113,11 +113,44 @@
 		document.getElementById("pbar").style.width = prog + "%";
 	}
 
+	function changeColor(bgColor, fgColor){
+		$(document.body).css("background-color", bgColor);
+		$("#mainJT").css("background-color", fgColor);
+	}
+
 </script>
 <body>
 
-	<div class="container animated fadeIn" style="margin-top: 100px;">
-		<div class="jumbotron text-center">
+	<nav class="navbar navbar-inverse">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      	<a class="navbar-brand" href="#">Pocket Pick</a>
+	    </div>
+	    <ul class="nav navbar-nav">
+	      <li><a href="#">About</a></li>
+	      <li class="dropdown">
+	        <a class="dropdown-toggle" data-toggle="dropdown">
+	        	Colors<span class="caret"></span>
+	        </a>
+	        <ul class="dropdown-menu">
+	          <li><a id="cc1">Default</a></li>
+	          <li><a id="cc2">Ghost</a></li>
+	          <li><a id="cc3">Abyssal</a></li>
+	          <li><a id="cc4">Chocolate</a></li>
+	          <li><a id="cc5">Serenity</a></li>
+	          <li><a id="cc6">Valentine</a></li>
+	          <li><a id="cc7">Formula</a></li>
+	          <li><a id="cc8">Loving</a></li>
+	        </ul>
+	      </li>
+	    </ul>
+	  </div>
+	</nav>
+
+
+
+	<div class="container animated fadeIn" style="position:absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+		<div id="mainJT" class="jumbotron text-center">
 			<div id="heading">
 				<div id="intro1">
 					<h1>Pocket Pick</h1> 
@@ -191,14 +224,14 @@
 				</div>
 				<div id="intro9">
 					<h1>The answer has been chosen</h1>
-					<h6>Preceed whenever you're ready</h6>
+					<h6>Reveal whenever you're ready</h6>
 					<button id="pickButton" type="button" onclick="pickFromList()" class="btn btn-primary btn-lg" style="margin-top: 20px;">Reveal</button>
 				</div>
 				<div id="intro10">
 					<h2>I think you should go with</h2>
 					<h1 id="result"></h1> 
 					<h6 id="revealText" style="margin-top: 20px;"></h6>
-					<button id="menuButton" type="button" onclick="changeMode(1); clearAll();" class="btn btn-primary btn-lg" style="margin-top: 20px;">Finish</button>
+					<button id="menuButton" type="button" onclick="changeMode(1); clearAll();" class="btn btn-primary btn-lg" style="margin-top: 20px;">Return</button>
 				</div>
 				<h3 id="warning" style="margin-top: 30px;"></h3>
 				<div id="progressbar" class="progress" style="margin-top: 80px;">
@@ -206,6 +239,30 @@
 				</div>
 			</div>
 			<script>
+				document.getElementById("cc1").onclick = function() {
+					changeColor("#FFFFFF", "#70E851");
+				}
+				document.getElementById("cc2").onclick = function() {
+					changeColor("#000000", "#DAF3F8");
+				}
+				document.getElementById("cc3").onclick = function() {
+					changeColor("#008584", "#CCCCCC");
+				}
+				document.getElementById("cc4").onclick = function() {
+					changeColor("#3E362F", "#D5CFA7");
+				}
+				document.getElementById("cc5").onclick = function() {
+					changeColor("#74B4E2", "#D4EF9F");
+				}
+				document.getElementById("cc6").onclick = function() {
+					changeColor("#B90504", "#FFFFFF");
+				}
+				document.getElementById("cc7").onclick = function() {
+					changeColor("#1E1E1E", "#E7554A");
+				}
+				document.getElementById("cc8").onclick = function() {
+					changeColor("#FF548F", "#FE6DE5");
+				}
 				document.onkeypress = function (e) {
 					e = e || window.event
 					if(menuType == 1){
@@ -300,6 +357,7 @@
 					$("h1").css("font-size", "40px");
 					$("h2").css("font-size", "30px");
 				}
+
 			</script>
 		</div>
 	</div>
