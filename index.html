@@ -12,6 +12,7 @@
 </head>
 <script type="text/javascript">
 	var menuType = 1;
+	var menuTypep = 1;
 	var currentDiv = "#intro1";
 	var listSize = 0;
 	var list = [];
@@ -26,9 +27,11 @@
 			else{
 				$("#progressbar").hide();
 			}});
+		if(menuType != 11){
+			menuTypep = menuType;
+		}
 		menuType = target;
 		currentDiv = targetDiv;
-
 	}
 
 	function clearAll(){
@@ -116,33 +119,46 @@
 	function changeColor(bgColor, fgColor){
 		$(document.body).css("background-color", bgColor);
 		$("#mainJT").css("background-color", fgColor);
+		$("#nbar").css("background-color", bgColor);
+		$("#menuLabel").css("color", fgColor);
+		$("#aboutLabel").css("color", fgColor);
+		$("#colorLabel").css("color", fgColor);
+		$("#footerLabel").css("color", fgColor);
+		var cols = document.getElementsByClassName("btn");
+		for(i=0; i < cols.length; i++) {
+		    cols[i].style.backgroundColor = bgColor;
+		}
+		$("#pbar").css({
+		    "background-image": "none",
+		    "background-color": bgColor
+		});
 	}
 
 </script>
 <body>
-
-	<nav class="navbar navbar-inverse">
+	<nav id="nbar" class="navbar navbar-inverse">
 	  <div class="container-fluid">
 	    <div class="navbar-header">
-	      	<a class="navbar-brand" href="#">Pocket Pick</a>
+	      	<a id="menuLabel" class="navbar-brand menu" style="font-size: 30px;" onclick="changeMode(1); clearAll();">Pocket Pick</a>
 	    </div>
 	    <ul class="nav navbar-nav">
-	      <li><a href="#">About</a></li>
-	      <li class="dropdown">
-	        <a class="dropdown-toggle" data-toggle="dropdown">
-	        	Colors<span class="caret"></span>
-	        </a>
-	        <ul class="dropdown-menu">
-	          <li><a id="cc1">Default</a></li>
-	          <li><a id="cc2">Ghost</a></li>
-	          <li><a id="cc3">Abyssal</a></li>
-	          <li><a id="cc4">Chocolate</a></li>
-	          <li><a id="cc5">Serenity</a></li>
-	          <li><a id="cc6">Valentine</a></li>
-	          <li><a id="cc7">Formula</a></li>
-	          <li><a id="cc8">Loving</a></li>
-	        </ul>
-	      </li>
+	      <li><a id="aboutLabel" class="menu" onclick="changeMode(11);">About</a></li>
+	    </ul>
+	    <ul class="nav navbar-nav navbar-right">
+	    <li class="dropdown">
+	      <a id="colorLabel" class="dropdown-toggle menu" data-toggle="dropdown">
+	      	Themes<span class="caret"></span>
+	      </a>
+	      <ul class="dropdown-menu">
+	        <li><a id="cc1">Default</a></li>
+	        <li><a id="cc2">Ghost</a></li>
+	        <li><a id="cc3">Abyssal</a></li>
+	        <li><a id="cc4">Chocolate</a></li>
+	        <li><a id="cc5">Valentine</a></li>
+	        <li><a id="cc6">Formula</a></li>
+	        <li><a id="cc7">Blush</a></li>
+	      </ul>
+	    </li>
 	    </ul>
 	  </div>
 	</nav>
@@ -233,14 +249,21 @@
 					<h6 id="revealText" style="margin-top: 20px;"></h6>
 					<button id="menuButton" type="button" onclick="changeMode(1); clearAll();" class="btn btn-primary btn-lg" style="margin-top: 20px;">Return</button>
 				</div>
-				<h3 id="warning" style="margin-top: 30px;"></h3>
-				<div id="progressbar" class="progress" style="margin-top: 80px;">
+				<div id="intro11">
+					<h1>About</h1>
+					<h6 style="margin-top: 20px;">
+					An application built for indecisive people.
+					</h6>
+					<button id="menuButton" type="button" onclick="changeMode(menuTypep);" class="btn btn-primary btn-lg" style="margin-top: 20px;">Return</button>
+				</div>
+				<h3 id="warning" style="margin-top: 40px;"></h3>
+				<div id="progressbar" class="progress" style="margin-top: 10px;">
 					<div id="pbar" class="progress-bar" role="progressbar" style="width:0%;"></div>
 				</div>
 			</div>
 			<script>
 				document.getElementById("cc1").onclick = function() {
-					changeColor("#FFFFFF", "#70E851");
+					changeColor("", "");
 				}
 				document.getElementById("cc2").onclick = function() {
 					changeColor("#000000", "#DAF3F8");
@@ -252,16 +275,13 @@
 					changeColor("#3E362F", "#D5CFA7");
 				}
 				document.getElementById("cc5").onclick = function() {
-					changeColor("#74B4E2", "#D4EF9F");
-				}
-				document.getElementById("cc6").onclick = function() {
 					changeColor("#B90504", "#FFFFFF");
 				}
-				document.getElementById("cc7").onclick = function() {
+				document.getElementById("cc6").onclick = function() {
 					changeColor("#1E1E1E", "#E7554A");
 				}
-				document.getElementById("cc8").onclick = function() {
-					changeColor("#FF548F", "#FE6DE5");
+				document.getElementById("cc7").onclick = function() {
+					changeColor("#FF548F", "#FF9BE9");
 				}
 				document.onkeypress = function (e) {
 					e = e || window.event
@@ -330,6 +350,7 @@
 				$("#intro8").hide();
 				$("#intro9").hide();
 				$("#intro10").hide();
+				$("#intro11").hide();
 				document.getElementById("nextButton1").onclick = function() {
 					updateList(1);
 				}
@@ -362,5 +383,7 @@
 		</div>
 	</div>
 	
+	<h6 id="footerLabel" style="position: fixed; bottom: 0; right: 0; padding: 0 15px;"> A side project by Jason</h6>
+
 </body>
 </html>
